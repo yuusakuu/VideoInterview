@@ -1,0 +1,55 @@
+{% extends "form.html" %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}")
+        </script>
+    {% endif %}
+{% endwith %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>아이디 찾기</title>
+</head>
+<body>
+    <div>
+        <p><h1>천재교육 K-디지털 트레이닝 AI 면접</h1>
+            </p>
+        
+    </div>
+    <div id="userList">
+        <!-- JSON 데이터가 여기에 표시될 것입니다 -->
+    </div>
+
+    <script>
+        // JSON 데이터를 가져올 URL을 설정
+        var url = '/get_user_ids'; // 이 URL은 Flask 애플리케이션에서 '/get_user_ids' 라우트를 가리켜야 합니다.
+
+        // JSON 데이터를 가져오는 AJAX 요청 생성
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // JSON 데이터 파싱
+                var jsonData = JSON.parse(xhr.responseText);
+
+                // HTML에 데이터 추가
+                var userList = document.getElementById('userList');
+                for (var i = 0; i < jsonData.user_ids.length; i++) {
+                    var userDiv = document.createElement('div');
+                    userDiv.textContent = jsonData.user_ids[i];
+                    userList.appendChild(userDiv);
+                }
+            }
+        };
+
+        // AJAX 요청 보내기
+        xhr.send();
+    </script>
+</body>
+</html>
+
+
+{% endblock %}

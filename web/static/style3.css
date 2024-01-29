@@ -1,0 +1,150 @@
+/* 기본 페이지 스타일 설정 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.head_body{
+    min-height: 20vh;
+}
+h2 {
+    color: #333;
+    font-weight: bold;
+}
+
+h3 {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.athome{
+    position: absolute;
+    transform: translateX(-50%);
+    top: 50px;
+}
+
+.title_text{
+    position: absolute;
+    transform: translateX(-50%);
+    top: 120px;
+    left: 50%;
+}
+
+.logo{
+    width: 198px;
+    height: 55px;
+    display: block;
+}
+.today_news{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top : 200px;
+}
+.button{
+    text-decoration: none;
+    background: #009a44;
+    padding: 15px;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 100;
+}
+.drop_down{
+    min-height: 10vh;
+}
+.drop_back{
+    background: rgba(0,154,68,.05);
+    padding: 20px;
+}
+#year_box, #day_box_id{
+    padding: 10px 0;
+}
+.day_text{
+    font-size: 16px;
+    color: #333;
+    font-weight: 100;
+}
+.drop_button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #fff;
+    color: #009a44;
+    border: 2px solid #009a44;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 5px;
+}
+#year, #month, #day{
+    border: 1px solid #009a44;
+    width: 100px;
+    height: 30px;
+}
+/* 버튼 스타일 설정 */
+button {
+    /* padding: 10px 20px; */
+    font-size: 16px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* 비디오 요소 스타일 설정 */
+#videoElement {
+    max-width: 100%;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    margin: 10px auto;
+    display: none;
+}
+
+/* 카운트다운 스타일 설정 */
+#countdown0, #countdown {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+/* 결과 페이지 버튼 스타일 설정 */
+#next {
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 10px;
+}
+
+/* 결과 페이지 버튼 스타일 설정 */
+#next:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* 폼 스타일 설정 */
+#save {
+    margin: 10px;
+}
+
+/* 알림 스타일 설정 */
+.alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px;
+}

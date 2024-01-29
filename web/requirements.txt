@@ -1,0 +1,8 @@
+flask
+pymysql 
+boto3
+passlib
+opencv-python
+SpeechRecognition
+Pillow
+# moviepy

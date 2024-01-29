@@ -1,0 +1,29 @@
+{% extends "form.html" %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}")
+        </script>
+    {% endif %}
+{% endwith %}
+
+<!-- register.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>chunjae_digital_learning</title>
+    
+</head>
+ 
+<body>
+    
+    <h1>천재교육 K-디지털 트레이닝 AI 면접</h1>
+    <h3>2번째 질문으로 이동합니다</h3>
+    <a href= "interview2">다음</a><br>
+</body>
+</html>
+
+{% endblock %}

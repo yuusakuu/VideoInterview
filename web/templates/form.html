@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        /* @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dongle&family=Noto+Serif+KR:wght@600&display=swap'); */
+        /* @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Noto+Serif+KR:wght@600&display=swap'); */
+        /* @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Gowun+Dodum&family=Noto+Serif+KR:wght@600&display=swap'); */
+        @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Gowun+Dodum&family=Jua&family=Noto+Serif+KR:wght@600&display=swap');
+        h1{
+            font-family: 'Do Hyeon', sans-serif;
+        }
+
+        h2{
+            font-family: 'Do Hyeon', sans-serif;
+        }
+        h3{
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+        p{
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+        label{
+            font-family: 'Jua', sans-serif;
+        }
+        input{
+            font-family: 'Jua', sans-serif;
+        }
+        button{
+            font-family: 'Jua', sans-serif;
+        }
+        a{
+            font-family: 'Jua', sans-serif;
+        }
+        
+    </style>
+    <!-- 상단 메뉴바 -->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* nav {
+        
+        background-color: #eca9a9;
+        overflow: hidden;
+    } */
+    nav {
+            background-color: #ffffff;
+            padding: 10px;
+            position: fixed; /* 상단에 고정 */
+            width: 100%;
+            top: 0;
+            z-index: 1000; /* 다른 요소들 위에 표시하기 위해 사용되는 Z-index */
+        }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    li {
+        float: left; /* 왼쪽으로 정렬 */
+        display: inline-block;
+    }
+
+    li a {
+        display: block;
+        color: white; /* 링크 텍스트 색상 */
+        text-align: center;
+        padding: 14px 16px; /* 위아래 14px, 좌우 16px의 안팎 간격 */
+        text-decoration: none; /* 밑줄 제거 */
+    }
+
+    li a:hover {
+        background-color: #009a44; /* 호버 시 배경 색상 변경 */
+    }
+</style>
+</head>
+<body>
+    <nav>
+        <!-- <ul>
+            <li><a href="#home">홈</a></li>
+        </ul> -->
+        <img src="{{ url_for('static', filename = 'process/logo.png' ) }}" alt="천재교육" width="198" height="55">
+    </nav>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

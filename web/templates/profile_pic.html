@@ -1,0 +1,149 @@
+{% extends "form.html" %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}")
+        </script>
+    {% endif %}
+{% endwith %}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>프로필 사진 촬영</title>
+    
+
+    <style>
+        
+
+        #box { 
+            margin-bottom: 10%; 
+        }
+        #videoElement {
+            width: 760px;
+            height: 580px;
+        }
+
+        
+
+        #bottom_box {
+            margin-left: 45%;
+            display: flex;
+        }
+
+        #processedImage { 
+            width: 0px;
+            height: 0px;
+            margin-left: 40%;
+        }
+
+        #video {
+            border: 5px solid #28a745;
+            background-color: #000000;
+        }
+    </style>
+
+    
+</head>
+
+<script type="text/javascript">
+    window.history.forward();
+    function noBack(){window.history.forward();}
+</script>
+   
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+    
+    
+    <div>
+        <!-- <img src="{{ url_for('static', filename = 'process/logo.png' ) }}" alt="천재교육" width="198" height="55"> -->
+        <p><h1>천재교육 K-디지털 트레이닝 AI 면접</h1>
+            </p>
+        
+    </div>
+    <!-- <img src="{{ url_for('static', filename = 'process/process1.jpg' ) }}" alt="사진" width="600" height="400"> -->
+    
+    <h2>프로필 사진 촬영하기</h2>
+    
+    <div>
+    <video id="video" width="640" height="480" autoplay></video>
+    <!-- <div style="justify-content: center;"> -->
+    <canvas id="canvas" width="320" height="240" style="display:flex;"></canvas>
+    <img id="processedImage" style="display: none;" alt="Processed Image">
+    <!-- </div> -->
+    </div>
+
+    <div id="box">
+    <!-- <button id="captureButton">사진 찍기</button> -->
+    <button id="captureButton" onclick="changeButtonText()">사진 찍기</button>
+    <script>
+        function changeButtonText() {
+            const captureButton = document.getElementById('captureButton');
+            captureButton.innerText = '다시 찍기';
+        }
+    </script>
+    <form id="save" action = "/interview"> 
+        <button id="go" disabled>AI 면접 참가하기</button>
+    </form>
+    <a href= "/logout">로그아웃</a>
+    </div>
+
+    <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+            const captureButton = document.getElementById('captureButton');
+
+            // 웹캠에서 비디오 스트림 가져오기
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function (error) {
+                    console.log("에러: " + error);
+                });
+
+            // 사진 찍기 버튼 클릭 시 이미지 캡처
+            captureButton.addEventListener('click', function () {
+                //추가한 코드
+                const context = canvas.getContext('2d');
+
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // 캔버스의 이미지 데이터를 base64로 인코딩
+                const imageData = canvas.toDataURL('image/jpeg');
+                processedImage.src = imageData;
+                processedImage.style.display = 'block';
+                // 이미지 데이터를 Flask 서버로 전송
+                fetch('/capture', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ image_data: imageData }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('서버 응답:', data);
+                    // 추가한 코드
+                    // processedImage.src = data.processed_image_path;
+                    // processedImage.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('에러:', error);
+                });
+
+                go.disabled = false ;
+            });
+        });
+    </script>
+
+
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
+    <script  src="https://code.jquery.com/jquery-latest.min.js?ver=1.1"></script>
+    <script>
+        // $(document).ready(function(){
+        //     // user_data = session.get('user', {});
+        //     // id = user_data.get('id');
+
+        //     if ("{{id}}" != "admin"){
+        //     // console.log("id", id);
+        //     // if (id != "admin"){
+        //         alert("관리자 아이디가 아닙니다!");
+        //         location.href = "/";
+        //     }
+        // });
+    </script>
+</head>
+
+<body>
+    <div>
+        <img src="{{ url_for('static', filename = 'process/logo.png' ) }}" alt="천재교육" width="198" height="55">
+        <p><h1>천재교육 K-디지털 트레이닝 AI 면접</h1>
+            </p>
+        
+    </div>
+    <h3>여기는 관리자 페이지 입니다.</h3>
+    <br>
+    <p>ID : {{id}}</p>
+    <p>이름 : {{name}}</p>
+    <img src="data:image/png;base64,{{ base64_img }}" alt="NumPy Image">
+    <p>1번 문제 응시 여부 : {{visit1}}</p>
+    <p>2번 문제 응시 여부 : {{visit2}}</p>
+    <p>3번 문제 응시 여부 : {{visit3}}</p>
+
+    <p>1번 문제 응답 : {{ans1}}</p>
+    <p>2번 문제 응답 : {{ans2}}</p>
+    <p>3번 문제 응답 : {{ans3}}</p>
+    
+    <br>
+    <a href="/admin">응시 유무 변경 페이지로 이동</a>
+    <a href="/adminview">유저 검색 페이지로 이동</a>
+    <a href="/home">메인 페이지로 이동</a>
+    <a href="/logout">로그아웃</a>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends "form.html" %}
+{% block content %}
+
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}")
+        </script>
+    {% endif %}
+{% endwith %}
+
+<!-- register.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>아이디 찾기</title>
+    
+</head>
+ 
+<body>
+    <div>
+        
+        <p><h1>천재교육 K-디지털 트레이닝 AI 면접</h1>
+            </p>
+        
+    </div>
+    <form action = "" method="post">
+        <!-- <p>id : <input type="text" name = "id"></p> -->
+        <!-- <p>password : <input type="password" name = "password"></p> -->
+        <h3>mail : <input type="mail" name = "mail"></h3>
+        <h3>name : <input type="text" name = "name"></h3>
+        <h3>이름, 메일주소를 입력하고 버튼을 누르세요.<br> <input type = "submit" value = "아이디 찾기"/> </h3>
+    </form>
+    <a href= "login">로그인</a><br>
+</body>
+</html>
+
+
+{% endblock %}

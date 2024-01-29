@@ -1,0 +1,126 @@
+/* 기본 페이지 스타일 설정 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #333;
+    font-weight: bold;
+}
+
+h3 {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+
+a {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #009a44;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+input {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #009a44;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+/* 버튼 스타일 설정 */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #009a44;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* 비디오 요소 스타일 설정 */
+#videoElement {
+    max-width: 100%;
+    border: 5px solid #28a745;
+    background-color: #000000;
+    margin: 10px auto;
+    display: none;
+}
+
+#mirrored {
+    max-width: 100%;
+    border: 5px solid #28a745;
+    background-color: #000000;
+    margin: 10px auto;
+    display: none;
+}
+
+
+#canvas {
+    max-width: 100%;
+    /* border: 5px solid #28a745; */
+    background-color: #000000;
+    margin: 10px auto;
+    display: none;
+}
+
+/* 카운트다운 스타일 설정 */
+#countdown0, #countdown {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+/* 결과 페이지 버튼 스타일 설정 */
+#next {
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 10px;
+}
+
+/* 결과 페이지 버튼 스타일 설정 */
+#next:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* 폼 스타일 설정 */
+#save {
+    margin: 10px;
+}
+
+/* 알림 스타일 설정 */
+.alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px;
+}
+

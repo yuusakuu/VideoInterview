@@ -1,0 +1,328 @@
+{% extends "form.html" %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}")
+        </script>
+    {% endif %}
+{% endwith %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>카메라 / 마이크 테스트</title>
+    
+
+<!-- 버튼 박스 -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 10vh; /* 100% viewport height */
+            padding: 20px;
+        }
+
+        #box { 
+            margin-bottom: 5%; 
+        }
+        #videoElement {
+            width: 760px;
+            height: 570px;
+        }
+
+
+        button {
+            margin: 10px 0;
+        }
+
+        #bottom_box {
+            margin-left: 45%;
+            display: flex;
+        }
+    </style>
+
+    
+
+    
+</head>
+
+<script type="text/javascript">
+    window.history.forward();
+    function noBack(){window.history.forward();}
+</script>
+   
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+    
+    
+    <div>
+        <p><h1>천재교육 K-디지털 트레이닝 AI 면접</h1>
+            </p>
+        
+    </div>
+    
+    <h2>카메라 마이크 테스트</h2>
+    <h3>준비가 완료되면 답변하기 버튼을 누르고 아래 문장을 따라 읽어주세요. 테스트 촬영은 자유롭게 진행할 수 있습니다.</h3>
+    <h3>"<h3 id="speech"></h3>"</h3>
+    
+    
+    <video id="videoElement" autoplay style="display: flex"></video>
+    
+
+    <div id="box">
+    <button id="startBtn">테스트 촬영 시작</button>
+    <button id="stopBtn" disabled>테스트 촬영 중지</button>
+    
+
+    <button id="recBtn">답변하기</button>
+    <button id="recstopBtn" disabled>답변 완료</button>
+
+    
+    <!-- <div id="countdown0"></div>  -->
+    <h3 id="countdown"></h3>
+    
+    
+    <form id="save" action = "/prof_pic"> 
+        <button id="next" disabled>다음으로</button>
+    </form>
+    
+    <a href= "/logout">로그아웃</a>
+    
+    </div>
+
+    
+    <script>
+        const speech_log = document.getElementById('speech').innerHTML = `전력승부다 아자`;
+
+        function updateCountdown() {
+
+            const minutes = Math.floor(remainingTimeInSeconds / 60);
+            const seconds = remainingTimeInSeconds % 60;
+            // 화면에 표시
+            document.getElementById('countdown0').innerHTML = `준비시간 ${minutes}분 ${seconds}초 남음`;
+            // 타이머 종료 여부 확인
+            if (remainingTimeInSeconds <= 0) {
+                document.getElementById('countdown0').innerHTML = '답변 시작';
+                // 카운트다운 종료 시 원하는 작업을 수행할 수 있습니다.
+                clearInterval(countdownInterval0); // 타이머 종료   
+                nextButton.disabled = true;
+                startBtn.disabled = true;
+                stopBtn.disabled = true;
+                recBtn.disabled = true;
+                recstopBtn.disabled = false; 
+                
+                record();
+                
+            }
+            remainingTimeInSeconds--; // 1초 감소
+        }
+        // 초기 카운트다운 업데이트
+        // updateCountdown();
+        // 1초마다 카운트다운 업데이트
+        const countdownInterval0 = setInterval(updateCountdown, 1000);
+
+
+
+        window.onload = () => {
+            const startBtn = document.getElementById('startBtn');
+            const stopBtn = document.getElementById('stopBtn');
+            const videoElement = document.getElementById('videoElement');
+            let mediaStream;
+
+            startBtn.onclick = async () => {
+                try {
+                    const constraints = { video: true, audio: true };
+                    mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
+                    videoElement.srcObject = mediaStream;
+                    // 화면 반전
+                    videoElement.style.transform = 'scaleX(-1)';
+                    videoElement.style.display = 'block';
+                    
+                    startBtn.disabled = true;
+                    stopBtn.disabled = false;
+
+                } catch (error) {
+                    console.error('웹 캠 스트림을 얻을 수 없습니다:', error);
+                }
+            };
+            
+
+            stopBtn.onclick = () => {
+                if (mediaStream) {
+                    mediaStream.getTracks().forEach(track => track.stop());
+                    videoElement.srcObject = null;
+                    videoElement.style.display = 'none';
+                    startBtn.disabled = false;
+                    stopBtn.disabled = true;
+                }
+            };
+        };
+    
+        const recBtn = document.getElementById('recBtn');
+        const recstopBtn = document.getElementById('recstopBtn');
+        const download = document.getElementById('download');
+        const videoElement = document.getElementById('videoElement');
+
+        let blobs = [];
+        let rec;
+        let mediaStream;
+    
+        document.getElementById('recBtn').addEventListener('click', record);
+        
+            recstopBtn.onclick = () => {
+                if (rec && rec.state === 'recording') {
+                    rec.stop();
+                    nextButton.disabled = false;
+                }
+
+                if (mediaStream) {
+                    mediaStream.getTracks().forEach(track => track.stop());
+                }
+
+                
+            };
+            save.onclick = () => {
+                // document.body.appendChild(videoElement);
+                save.disabled = true;
+                // upload.disabled = false ;
+            };
+
+
+
+        //////////////////////////////////////////////////////////
+        // record 함수 정의 
+        async function record () {
+        //document.getElementById('countdown0').innerHTML = '답변 시작';
+        clearInterval(countdownInterval0); // 타이머 종료   
+        
+            const constraints = { video: true, audio: true };
+
+        
+        // 목표 시간 설정 
+        const targetTimeInSeconds = 10;
+        let remainingTimeInSeconds = targetTimeInSeconds;
+        let countdownfont = document.getElementById('countdown');
+
+        // 카운트다운을 업데이트하는 함수
+        function updateCountdown() {
+            const minutes = Math.floor(remainingTimeInSeconds / 60);
+            const seconds = remainingTimeInSeconds % 60;
+
+            // 화면에 표시
+            document.getElementById('countdown').innerHTML = `${minutes}분 ${seconds}초 남음`;
+
+            // 타이머 종료 여부 확인
+            if (remainingTimeInSeconds <= 0) {
+                document.getElementById('countdown').innerHTML = '답변 제출 완료';
+                // 카운트다운 종료 시 원하는 작업을 수행할 수 있습니다.
+                clearInterval(countdownInterval); // 타이머 종료
+                mediaStream.getTracks().forEach(track => track.stop());
+                rec.stop();
+                nextButton.disabled = false;
+            }
+
+            remainingTimeInSeconds--; // 1초 감소
+        }
+
+        // 초기 카운트다운 업데이트
+        updateCountdown();
+
+        // 1초마다 카운트다운 업데이트
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        // 영상 저장하기
+        try {
+            mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
+            videoElement.srcObject = mediaStream;
+            // 화면 반전
+            videoElement.style.transform = 'scaleX(-1)';
+            
+            videoElement.style.display = 'block';
+
+            // 비디오 프레임이 업데이트될 때마다 좌우 반전을 적용하는 함수 호출
+            videoElement.addEventListener('loadedmetadata', () => {
+                        flipVideo();
+                    });
+
+            rec = new MediaRecorder(mediaStream);
+            rec.ondataavailable = (e) => blobs.push(e.data);
+            rec.onstop = () => {
+                videoElement.srcObject = null;
+                videoElement.style.display = 'none';
+                let blob = new Blob(blobs, { type: 'video/webm' });
+                let url = window.URL.createObjectURL(blob);
+                // download.href = url;
+                
+                videoElement.src = url;
+                videoElement.controls = true; 
+
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', './sr', true);
+
+                // const data = 'ans1'
+                
+
+                xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const responseText = xhr.responseText;
+                    const resultContainer = document.getElementById('countdown');
+                    
+                    if ( responseText === speech_log) {
+                        next.disabled = false; 
+                        resultContainer.textContent = '결과: ' + responseText + ' : ' + speech_log;
+                        console.log('파일 업로드 성공');
+                    } else {
+                        resultContainer.textContent = '결과: ' + responseText + '  ' + '다시 시도해보세요';
+                        next.disabled = false; 
+                    }
+                    
+                } else {
+                    console.error('파일 업로드 실패');
+                }
+                };
+
+                const formData = new FormData() ; 
+                formData.append('video', blob, 'webcam_recording.webm'); 
+
+                xhr.send(formData);
+                
+
+                const responseText = xhr.responseText;
+
+
+                recBtn.disabled = false;
+                recstopBtn.disabled = true;
+                save.disabled = false ;
+                // document.getElementById('countdown').innerHTML = '답변 제출 완료';
+                // document.getElementById('countdown').innerHTML = responseText;
+                // 카운트다운 종료 시 원하는 작업을 수행할 수 있습니다.
+                clearInterval(countdownInterval); // 타이머 종료
+                
+                };
+
+                recBtn.disabled = true;
+                recstopBtn.disabled = false;
+                startBtn.disabled = true;
+                stopBtn.disabled = true; 
+
+                rec.start();
+                
+            } catch (error) {
+                console.error('웹 캠 스트림을 얻을 수 없습니다:', error);
+            }
+        };
+        
+    </script>
+
+
+</body>
+</html>
+{% endblock %}

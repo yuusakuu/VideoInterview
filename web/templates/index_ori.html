@@ -1,0 +1,68 @@
+{% extends "form.html" %}
+{% block content %}
+<html>
+<head>
+    <title>Chunjae Digital Learning AI Interview</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+</head>
+<script type="text/javascript">
+    window.history.forward();
+    function noBack(){window.history.forward();}
+</script>
+
+
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+    <h1>천재교육 K-디지털 트레이닝 AI 면접</h1>
+    <h3>{{ id }} 님</h3> 
+    <h1>반갑습니다!</h1>
+    
+    <form id="loginForm" action="/login2" method="POST">
+        <label for="serialNumber">일련번호:</label>
+        <input type="text" id="serialNumber" name="serialNumber">
+        <input type="submit" value="입력">
+    </form>
+    <br>
+    <a href= "/logout">로그아웃</a>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // 기본 폼 제출 동작을 중단합니다.
+
+            const serialNumber = document.getElementById('serialNumber').value;
+
+            // XMLHttpRequest를 사용하여 서버로 데이터 전송
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/login2', true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+            // JSON 형태로 데이터를 전송
+            const data = JSON.stringify({ serialNumber: serialNumber });
+            xhr.send(data);
+
+            // 서버 응답 처리
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    console.log('서버 응답:', xhr.responseText);
+                    // 로그인이 성공했을 때 페이지 리디렉션
+                    window.location.href = 'camera_test'; // 
+                } else {
+                    console.error('서버 오류:', xhr.status, xhr.statusText);
+                    // 로그인 실패 메시지를 표시하거나 다른 작업을 추가
+                }
+            };
+        });
+
+        
+    </script>
+
+
+</body>
+</html>
+
+
+</body>
+
+{% endblock %}

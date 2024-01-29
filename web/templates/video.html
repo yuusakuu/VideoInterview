@@ -1,0 +1,24 @@
+//html
+//<video class="user-video">
+<script>
+const videoTag = document.querySelector(".user-video");
+let videoMediaStream = null;
+ 
+navigator.mediaDevices
+  .getUserMedia({ // constraints
+    audio: false,
+    video: {
+      width: 360,
+      height: 240,
+    },
+  })
+  .then(function (mediaStream) {
+    videoTag.srcObject = mediaStream;
+    videoTag.onloadedmetadata = function() {
+        videoTag.play();
+      };
+    videoMediaStream = mediaStream;
+  };)
+  ; 
+
+</script>

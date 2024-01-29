@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <title>CodePen - MediaPipe - Face Detection</title>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <link rel="icon" href="favicon.ico">
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.6/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection@0.4/face_detection.js" crossorigin="anonymous"></script><link rel="stylesheet" href="./style.css">
+    <!-- js -->
+    <script type="module" src="./face_detect.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <video class="input_video"></video>
+      <div class="canvas-container">
+        <canvas class="output_canvas" width="1280px" height="720px"></canvas>
+      </div>
+      <div class="loading">
+        <div class="message">Loading</div>
+      </div>
+    </div>
+      <div class="control-panel"></div>
+  </body>
+</html>
+
+
+<!-- https://m.blog.naver.com/ska097777/222676288815 -->

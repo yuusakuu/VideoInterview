@@ -1,0 +1,110 @@
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}")
+        </script>
+    {% endif %}
+{% endwith %}
+
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Chunjae Digital Learning AI Interview</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+
+    <!-- 글꼴 -->
+    <style>
+        /* @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dongle&family=Noto+Serif+KR:wght@600&display=swap'); */
+        /* @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Noto+Serif+KR:wght@600&display=swap'); */
+        /* @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Gowun+Dodum&family=Noto+Serif+KR:wght@600&display=swap'); */
+        @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle&family=Gowun+Dodum&family=Jua&family=Noto+Serif+KR:wght@600&display=swap');
+        h1{
+            font-family: 'Do Hyeon', sans-serif;
+        }
+
+        h2{
+            font-family: 'Do Hyeon', sans-serif;
+        }
+        h3{
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+        button{
+            font-family: 'Jua', sans-serif;
+        }
+        a{
+            font-family: 'Jua', sans-serif;
+        }
+        
+    </style>
+
+
+<!-- 상단 메뉴바 -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        li {
+            float: left; /* 왼쪽으로 정렬 */
+            display: inline-block;
+        }
+
+        li a {
+            display: block;
+            color: white; /* 링크 텍스트 색상 */
+            text-align: center;
+            padding: 14px 16px; /* 위아래 14px, 좌우 16px의 안팎 간격 */
+            text-decoration: none; /* 밑줄 제거 */
+        }
+
+        li a:hover {
+            background-color: #009a44; /* 호버 시 배경 색상 변경 */
+        }
+    </style>
+</head>
+ 
+<body>
+    <nav>
+        <!-- <ul>
+            <li><a href="#home">홈</a></li>
+        </ul> -->
+        <img src="{{ url_for('static', filename = 'process/logo.png' ) }}" alt="천재교육" width="198" height="55">
+    </nav>
+    <div>
+        <!-- <img src="{{ url_for('static', filename = 'process/logo.png' ) }}" alt="천재교육" width="198" height="55"> -->
+        <p><h1>천재교육 K-디지털 트레이닝 AI 면접</h1>
+            </p>
+        
+    </div>
+
+
+        <h3>로그인이 필요한 서비스입니다.</h3>
+        <a href= "login">로그인</a><br>
+        <br>
+
+        <a href= "register">회원가입</a>
+</body>
+</html>
+ 
+ 
+
+ 
+
+ 
+ 

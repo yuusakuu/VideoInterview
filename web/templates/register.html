@@ -1,0 +1,51 @@
+{% extends "form.html" %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}")
+        </script>
+    {% endif %}
+{% endwith %}
+
+
+
+<!-- register.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    
+</head>
+ 
+<body>
+    <div>
+        
+        <p><h1>천재교육 K-디지털 트레이닝 AI 면접</h1>
+            </p>
+        
+    </div>
+    <form action = "" method="post">
+        <h3>id : <input type="text" name = "id"></h3>
+        <h3>password : <input type="password" name = "password"></h3>
+        <h3>mail : <input type="mail" name = "mail"></h3>
+        <h3>name : <input type="text" name = "name"></h3>
+        <label for="course" class="course_text">
+            과정 :
+        </label>
+        <select id="course" name="course">
+            <option value="빅데이터">빅데이터</option>
+            <option value="풀스택">풀스택</option>
+            <option value="PM">PM</option>
+        </select>
+        <!-- <p>과정 : <input type="text" name = "course"></p> -->
+        <h3>이름과 비밀번호를 입력하고 생성버튼을 누르세요.<br> <input type = "submit" value = "생성"/> </h3>
+    </form>
+    <a href= "login">로그인</a><br>
+</body>
+</html>
+
+
+{% endblock %}

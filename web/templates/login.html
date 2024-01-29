@@ -1,0 +1,49 @@
+{% extends "form.html" %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{messages[-1]}}")
+        </script>
+    {% endif %}
+{% endwith %}
+<!-- login.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    
+    <style>
+        #box { 
+            margin-bottom: 5%; 
+        }
+        
+        button {
+            margin: 10px 0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div>
+        
+        <p><h1>천재교육 K-디지털 트레이닝 AI 면접</h1>
+            </p>
+        
+    </div>
+    <form action = "" method="post">
+        <h3>id : <input type="text" name = "username"></h3>
+        <h3>password : <input type="password"  name = "password"></h3>
+        <h3>이름과 비밀번호를 입력하고 로그인버튼을 누르세요.<br><input type = "submit" value = "로그인"/> </h3>
+    </form>
+    <div id="box">
+        <a href="/register">회원가입</a>
+        <a href="/forgot_id">아이디 찾기</a>
+        <a href="/forgot_password">비밀번호 찾기</a>
+    </div>
+</body>
+</html>
+{% endblock %}

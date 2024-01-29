@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
+    <script  src="https://code.jquery.com/jquery-latest.min.js?ver=1.1"></script>
+    <script>
+        console.log("log")
+        $(document).ready(function(){
+            // user_data = session.get('user', {});
+            // id = user_data.get('id');
+
+            if ("{{id}}" != "admin"){
+            // console.log("id", id);
+            // if (id != "admin"){
+                alert("관리자 아이디가 아닙니다!");
+                location.href = "/";
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <script>
+        console.log('log')
+    </script>
+    <div>
+        <img src="{{ url_for('static', filename = 'process/logo.png' ) }}" alt="천재교육" width="198" height="55">
+        <p><h1>천재교육 K-디지털 트레이닝 AI 면접</h1>
+            </p>
+        
+    </div>
+    <h3>여기는 관리자 페이지 입니다.</h3>
+    <br>
+    <form action = "" method="post">
+        <p>id : <input type="text" name = "user_id"></p>
+        <p>visit1 : <input type="text"  name = "visit1"></p>
+        <p>visit2 : <input type="text"  name = "visit2"></p>
+        <p>visit3 : <input type="text"  name = "visit3"></p>
+
+        <p>유저 아이디와 응시여부를 입력하고 업데이트 버튼을 누르세요.<br><input type = "submit" value = "업데이트"/> </p>
+    </form>
+
+    <a href="/adminview">유저 검색 페이지로 이동</a>
+    <a href="/home">메인 페이지로 이동</a>
+    <a href="/logout">로그아웃</a>
+</body>
+</html>
